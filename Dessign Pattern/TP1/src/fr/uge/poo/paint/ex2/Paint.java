@@ -19,7 +19,7 @@ public class Paint {
 	var path = Path.of(args[0]);
 	var linesArray = new ArrayList<Line>();
 	try (var lines = Files.lines(path)) {
-	  lines.forEach(line -> linesArray.add(Line.parse(line)));
+	  lines.filter(line -> !line.isBlank()).forEach(line -> linesArray.add(Line.parse(line)));
 	}
 
 	SimpleGraphics area = new SimpleGraphics("area", 800, 600);

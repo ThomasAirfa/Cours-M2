@@ -12,14 +12,14 @@ public class Paint {
 
   public static void main(String[] args) throws IOException {
 	if (args.length != 1) {
-	  System.err.println("Missing file. Usage : java -cp bin fr.uge.poo.paint.ex2.Paint <file>");
+	  System.err.println("Missing file. Usage : java -cp bin fr.uge.poo.paint.ex3.Paint <file>");
 	  return;
 	}
 
 	var path = Path.of(args[0]);
 	var shapesArray = new ArrayList<Shape>();
 	try (var lines = Files.lines(path)) {
-	  lines.forEach(line -> shapesArray.add(Shape.parse(line)));
+	  lines.filter(line -> !line.isBlank()).forEach(line -> shapesArray.add(Shape.parse(line)));
 	}
 
 	SimpleGraphics area = new SimpleGraphics("area", 800, 600);
