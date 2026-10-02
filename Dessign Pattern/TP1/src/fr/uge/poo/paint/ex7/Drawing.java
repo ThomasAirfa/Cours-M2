@@ -35,19 +35,6 @@ public final class Drawing {
   }
 
   public WindowSize requiredWindowSize() {
-	return shapes.stream().map(Drawing::requiredSize).reduce(new WindowSize(500, 500), (current, shapeSize) -> {
-	  return new WindowSize(Math.max(current.width(), shapeSize.width()), Math.max(current.height(), shapeSize.height()));
-	});
-  }
-
-  private static WindowSize requiredSize(Shape shape) {
-	return switch (shape) {
-	case Line line -> {
-	  yield new WindowSize(Math.max(line.x1(), line.x2()), Math.max(line.y1(), line.y2()));
-	}
-	case RectangularShape rectangle -> {
-	  yield new WindowSize(rectangle.x() + rectangle.width(), rectangle.y() + rectangle.height());
-	}
-	};
+	return shapes.stream().map(Shape::requiredWindowSize).reduce(WindowSize.MIN_WINDOW_SIZE, WindowSize::max);
   }
 }

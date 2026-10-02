@@ -14,4 +14,8 @@ sealed interface RectangularShape extends Shape permits Rectangle, Ellipse {
   default Point center() {
 	return new Point(x() + width() / 2, y() + height() / 2);
   }
+
+  default WindowSize requiredWindowSize() {
+	return new WindowSize(x() + width(), y() + height());
+  }
 }
