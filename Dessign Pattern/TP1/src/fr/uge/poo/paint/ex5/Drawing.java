@@ -1,11 +1,11 @@
 package fr.uge.poo.paint.ex5;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+
+import fr.uge.poo.paint.ex5.Graphics.GraphicsColor;
 
 public final class Drawing {
   private final List<Shape> shapes = new ArrayList<>();
@@ -29,7 +29,7 @@ public final class Drawing {
 
   public void draw(Graphics graphics) {
 	for (var shape : shapes) {
-	  graphics.setColor(shape == selected ? Color.ORANGE : Color.BLACK);
+	  graphics.setColor(shape == selected ? GraphicsColor.ORANGE : GraphicsColor.BLACK);
 	  shape.draw(graphics);
 	}
   }
