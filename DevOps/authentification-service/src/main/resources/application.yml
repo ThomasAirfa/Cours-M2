@@ -1,0 +1,5 @@
+spring :
+  application :
+    name : Authentification Service
+server :
+  port : 8080
