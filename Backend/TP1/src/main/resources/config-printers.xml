@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="FrenchPrinter" class="fr.uge.jee.printers.FrenchMessagePrinter"></bean>
+    <bean id="SimplePrinter" class="fr.uge.jee.printers.SimpleMessagePrinter"></bean>
+    <bean id="CustomizablePrinter" class="fr.uge.jee.printers.CustomizableMessagePrinter">
+        <constructor-arg value="Hello from the config.xml"></constructor-arg>
+    </bean>
+    <bean id="CountPrinter" class="fr.uge.jee.printers.CountMessagePrinter" scope="prototype"></bean>
+    <bean id="SlowPrinter" class="fr.uge.jee.printers.SlowContructionMessagePrinter" lazy-init="true"></bean>
+</beans>
