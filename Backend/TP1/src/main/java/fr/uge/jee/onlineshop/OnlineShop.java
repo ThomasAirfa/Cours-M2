@@ -12,8 +12,8 @@ public class OnlineShop {
 
   public OnlineShop(String name, Set<Delivery> deliveryOptions, Set<Insurance> insurances) {
     this.name = Objects.requireNonNull(name);
-    this.deliveryOptions = Collections.unmodifiableSet(new LinkedHashSet<>(deliveryOptions));
-    this.insurances = Collections.unmodifiableSet(new LinkedHashSet<>(insurances));
+    this.deliveryOptions = Set.copyOf(deliveryOptions);
+    this.insurances = Set.copyOf(insurances);
   }
 
   public void printDescription() {
