@@ -64,6 +64,11 @@ with torch.inference_mode():
         print(tokenizer.decode(answer))
         print()
 
+with torch.inference_mode():
+    for _ in range(MAX_TOKENS):
+        break
+
+
 print()
 print("Token par token")
 for i, t in enumerate(answer):

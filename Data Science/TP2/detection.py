@@ -27,13 +27,13 @@ def detect(text, key, tokenizer):
     return k, n, p_value
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("text", help="texte à analyser")
-    parser.add_argument("key", help="clé secrète")
-    args = parser.parse_args()
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    k, n, p = detect(args.text, args.key.encode("utf-8"), tokenizer)
-    print(f"tokens distincts : {n}, impairs : {k} ({k / n:.1%})")
-    print(f"p-value : {p}")
+parser = argparse.ArgumentParser()
+parser.add_argument("text", help="texte à analyser")
+parser.add_argument("key", help="clé secrète")
+args = parser.parse_args()
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+k, n, p = detect(args.text, args.key.encode("utf-8"), tokenizer)
+print(f"tokens distincts : {n}, impairs : {k} ({k / n:.1%})")
+print(f"p-value : {p}")

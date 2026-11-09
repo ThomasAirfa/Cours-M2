@@ -2,13 +2,7 @@
 """
 
 import torch
-import hmac
 from transformers import AutoModelForCausalLM, AutoTokenizer
-
-def hash_token(token_id, key):
-    message = str(token_id).encode("utf-8")
-    digest = hmac.digest(key, message, "sha256")
-    return int.from_bytes(digest, "big")
 
 MODEL_NAME = "HuggingFaceTB/SmolLM2-135M-Instruct"
 MAX_TOKENS = 80
