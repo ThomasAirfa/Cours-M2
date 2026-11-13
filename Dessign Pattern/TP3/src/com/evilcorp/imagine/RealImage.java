@@ -2,12 +2,12 @@ package com.evilcorp.imagine;
 
 import java.util.Objects;
 
-public class Image {
+public class RealImage implements Image {
   private final String name;
   private final int size;
   private final double hue;
 
-  private Image(String name, int size, double hue) {
+  private RealImage(String name, int size, double hue) {
 	Objects.requireNonNull(name);
 	if (size <= 0) {
 	  throw new IllegalStateException();
@@ -17,19 +17,22 @@ public class Image {
 	this.hue = hue;
   }
 
+  @Override
   public String name() {
 	return name;
   }
 
+  @Override
   public int size() {
 	return size;
   }
 
+  @Override
   public double hue() {
 	return hue;
   }
 
-  public static Image download(String url) {
+  public static RealImage download(String url) {
 	var parts = url.split("/");
 	var name = parts[parts.length - 1];
 	var size = Math.abs(name.hashCode()) % 1_000_000;
@@ -41,21 +44,17 @@ public class Image {
 	  // not a good idea but it makes things easier
 	  throw new RuntimeException(e);
 	}
-	return new Image(name, size, hue);
-  }
-  
-  public static Image downloadLazy(String url) {
-	return null;
+	return new RealImage(name, size, hue);
   }
 
   @Override
   public boolean equals(Object o) {
 	if (this == o)
 	  return true;
-	if (!(o instanceof Image))
+	if (!(o instanceof RealImage))
 	  return false;
 
-	Image image = (Image) o;
+	RealImage image = (RealImage) o;
 
 	if (size != image.size)
 	  return false;
