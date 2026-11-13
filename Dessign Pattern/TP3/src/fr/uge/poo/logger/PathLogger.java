@@ -1,4 +1,4 @@
-package fr.uge.poo.logger.q0;
+package fr.uge.poo.logger;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -10,19 +10,28 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 
-public class PathLogger implements Closeable {
+public class PathLogger implements Logger, Closeable {
   private final BufferedWriter writer;
-  
+
   public PathLogger(Path path) {
 	try {
-	  this.writer = Files.newBufferedWriter(Objects.requireNonNull(path), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+	  this.writer = Files.newBufferedWriter(Objects.requireNonNull(path), StandardCharsets.UTF_8,
+	      StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 	} catch (IOException e) {
 	  throw new UncheckedIOException(e);
 	}
   }
-  
-  public void log(String message) {
-	
+
+  @Override
+  public void log(Level level, String message) {
+	Objects.requireNonNull(level);
+	Objects.requireNonNull(message);
+	try {
+	  writer.append(level + " " + message + "\n");
+	  writer.flush();
+	} catch (IOException e) {
+	  throw new UncheckedIOException(e);
+	}
   }
 
   @Override
